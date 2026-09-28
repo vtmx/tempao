@@ -1,0 +1,85 @@
+<html lang='pt-br'>
+<head>
+  <title>Tempão</title>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta name='author' content='Vitor Melo'>
+  <meta name='description' content='Calculo para panificadora.'>
+  <link rel='icon' type='image/png' sizes='any' href='/favicon.png'>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/beercss@5.0.3/dist/cdn/beer.min.css'>
+  <script type='module' src='https://cdn.jsdelivr.net/npm/beercss@5.0.3/dist/cdn/beer.min.js'></script>
+  <script type='module' src='https://cdn.jsdelivr.net/npm/material-dynamic-colors@1.1.4/dist/cdn/material-dynamic-colors.min.js'></script>
+  <script type='module'>
+    await ui('theme', '#fabd00');
+
+    const MIN_MINUTES = 3 * 60;
+    const MAX_MINUTES = 15 * 60;
+    const DAY_MINUTES = 24 * 60;
+    const ERROR_COLOR = '#ff5252';
+
+    const [currentField, targetField] = document.querySelectorAll('.field input[type="time"]');
+    const timerOutput = document.querySelector('article h2');
+
+    const pad = (value) => String(value).padStart(2, '0');
+
+    const toMinutes = (time) => {
+      const [hours, minutes] = time.split(':').map(Number);
+      return hours * 60 + minutes;
+    };
+
+    const clock = (date = new Date()) => `${pad(date.getHours())}:${pad(date.getMinutes())}`;
+
+    const render = () => {
+      const current = currentField.value;
+      const target = targetField.value;
+
+      if (!current || !target) {
+        timerOutput.textContent = '--:--';
+        timerOutput.style.color = '';
+        return;
+      }
+
+      let minutes = toMinutes(target) - toMinutes(current);
+      if (minutes <= 0) minutes += DAY_MINUTES;
+
+      const inRange = minutes >= MIN_MINUTES && minutes <= MAX_MINUTES;
+
+      timerOutput.textContent = `${pad(Math.floor(minutes / 60))}:${pad(minutes % 60)}`;
+      timerOutput.style.color = inRange ? '' : ERROR_COLOR;
+    };
+
+    let colors = await materialDynamicColors('#ffd700');
+    await ui('theme', '#fabd00');
+
+    currentField.value = clock();
+
+    render();
+    currentField.addEventListener('input', render);
+    targetField.addEventListener('input', render);
+  </script>
+</head>
+<body class='dark'>
+  <div id='app' class='padding'>
+    <figure class='center-align'>
+      <img class='small-width small-height' src='/favicon.png'>
+    </figure>
+
+    <div class='field border label prefix large'>
+      <i>timer</i>
+      <input type='time' value='19:00' style='font-size: 1.5rem'>
+      <label>Horário atual</label>
+    </div>
+
+    <div class='field border label prefix large'>
+      <i>timer</i>
+      <input type='time' value='07:00' style='font-size: 1.5rem'>
+      <label>Pão pronto às</label>
+    </div>
+
+    <article class='padding'>
+      <h2 id='currenttime' class='center-align'>12:00</h2>
+      <h6 id='currenttime' class='no-margin center-align'>timer</h6>
+    </article>
+  </div>
+</body>
+</html>
