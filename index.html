@@ -64,21 +64,25 @@
       <img class='small-width small-height' src='/favicon.png'>
     </figure>
 
-    <div class='field border label prefix large'>
-      <i>timer</i>
-      <input type='time' value='19:00' style='font-size: 1.5rem'>
-      <label>Horário atual</label>
+    <div style='margin-bottom: 1rem'>
+      <label for='current-time' style='display: block'>Horário atual</label>
+      <div class='field no-margin border prefix large'>
+        <i>timer</i>
+        <input id='current-time' type='time' value='19:00' style='font-size: 1.5rem'>
+      </div>
     </div>
 
-    <div class='field border label prefix large'>
-      <i>timer</i>
-      <input type='time' value='07:00' style='font-size: 1.5rem'>
-      <label>Pão pronto às</label>
+    <div style='margin-bottom: 1rem'>
+      <label for='time-finished' style='display: block'>Pão pronto às</label>
+      <div class='field no-margin border prefix large'>
+        <i>timer</i>
+        <input id='time-finished' type='time' value='07:00' style='font-size: 1.5rem'>
+      </div>
     </div>
 
     <article class='padding'>
-      <h2 id='currenttime' class='center-align'>12:00</h2>
-      <h6 id='currenttime' class='no-margin center-align'>timer</h6>
+      <h2 id='timer-time' class='center-align'>12:00</h2>
+      <h6 class='no-margin center-align'>timer</h6>
     </article>
   </div>
 </body>
