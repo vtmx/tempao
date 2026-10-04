@@ -1,0 +1,24 @@
+{
+  "name": "TemPão",
+  "short_name": "TemPão",
+  "description": "Calculo para panificadora.",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "pt-BR",
+  "display": "standalone",
+  "background_color": "#16130e",
+  "theme_color": "#fabd00",
+  "dir": "auto",
+  "orientation": "any",
+  "categories": [
+    "lifestyle"
+  ],
+  "icons": [
+    {
+      "purpose": "any",
+      "sizes": "96x96",
+      "src": "favicon.png",
+      "type": "image/png"
+    }
+  ]
+}
